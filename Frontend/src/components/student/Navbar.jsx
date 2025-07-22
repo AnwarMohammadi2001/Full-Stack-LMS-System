@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import assets from "../../assets/assets";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
+import { AppContext } from "../../context/AppContext";
 
 const Navbar = () => {
   const location = useLocation();
+  const { navigate } = useContext(AppContext);
   const isCourseListPage = location.pathname.includes("/course-list");
   const { openSignUp } = useClerk();
   const { user } = useUser();
@@ -17,8 +19,10 @@ const Navbar = () => {
       }`}
     >
       {/* Logo */}
+
       <img
         src={assets.logo}
+        onClick={() => navigate("/")}
         alt="logo"
         className="w-28 lg:w-32 cursor-pointer"
       />
