@@ -4,7 +4,9 @@ import { AppContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
-  const { currency } = useContext(AppContext);
+  const { currency, calculateRating } = useContext(AppContext);
+
+  const rating = calculateRating(course);
 
   const discountedPrice = (
     course.coursePrice -
@@ -26,22 +28,28 @@ const CourseCard = ({ course }) => {
       {/* Content */}
       <div className="p-3 text-left">
         <h3 className="text-base font-semibold mb-1">{course.courseTitle}</h3>
-        <p className="text-sm text-gray-500 ">{course.educator.name}</p>
+        <p className="text-sm text-gray-500">
+          {course.educator?.name || "Unknown Educator"}
+        </p>
 
         {/* Rating */}
-        <div className="flex items-center gap-2 ">
-          <span>4.5</span>
+        <div className="flex items-center gap-2">
+          <span>{rating.toFixed(1)}</span>
           <div className="flex gap-1">
             {[...Array(5)].map((_, index) => (
               <img
                 key={index}
-                src={assets.star}
+                src={
+                  index < Math.floor(rating) ? assets.star : assets.star_blank
+                }
                 alt="rating"
                 className="w-3.5 h-3.5"
               />
             ))}
           </div>
-          <span className="text-gray-500">(22)</span>
+          <span className="text-gray-500">
+            ({course.courseRating?.length || 0})
+          </span>
         </div>
 
         {/* Price */}

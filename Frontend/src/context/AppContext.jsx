@@ -9,8 +9,25 @@ export const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const [allCourses, setAllCourses] = useState([]);
+  const [isEducator, setIsEducator] = useState(true);
+  // Function to fetch courses (simulated with dummy data)
   const fetchCourses = async () => {
     setAllCourses(dummyCourses);
+  };
+  const calculateRating = (course) => {
+    if (
+      !course ||
+      !Array.isArray(course.courseRating) ||
+      course.courseRating.length === 0
+    ) {
+      return 0;
+    }
+
+    const totalRating = course.courseRating.reduce(
+      (sum, rating) => sum + rating.rating,
+      0
+    );
+    return totalRating / course.courseRating.length;
   };
 
   useEffect(() => {
@@ -22,6 +39,9 @@ export const AppContextProvider = ({ children }) => {
     currency,
     allCourses,
     navigate,
+    calculateRating,
+    isEducator,
+    setIsEducator,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
