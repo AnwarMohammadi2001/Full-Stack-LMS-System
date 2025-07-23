@@ -15,8 +15,7 @@ const Footer = () => {
           </div>
           <p className="text-gray-300">
             Tamadon is your trusted partner in creative printing, delivering
-            professional and high-quality services. Tamadon is your trusted
-            partner in creative printing, 
+            professional and high-quality services.
           </p>
         </div>
 
@@ -63,7 +62,7 @@ const Footer = () => {
         <div className="text-left">
           <h3 className="text-xl font-semibold mb-4">Newsletter</h3>
           <p className="text-gray-300 mb-4">
-            Subscribe to receive our latest updates and offers.
+            The latest news, articles, and resource, sent to your inbox weekly.
           </p>
           <form className="flex flex-col sm:flex-row items-center gap-2">
             <input
