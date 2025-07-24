@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
+import assets from "../../assets/assets";
 
 const CourseDetails = () => {
   const { id } = useParams(); // گرفتن id از URL
-  const { allCourses } = useContext(AppContext); // گرفتن لیست همه دوره‌ها از context
+  const { allCourses, calculateRating } = useContext(AppContext); // گرفتن لیست همه دوره‌ها از context
   const [courseData, setCourseData] = useState(null); // تعریف state برای نگهداری داده‌های دوره
 
   useEffect(() => {
@@ -35,6 +36,35 @@ const CourseDetails = () => {
           className="text-gray-500 pt-4 text-xs md:text-sm"
         />
         {/* Course Review */}
+        {/* Rating */}
+        <div className="flex items-center gap-2 pt-3 pb-1">
+          <div className="flex gap-1">
+            {[...Array(5)].map((_, index) => (
+              <img
+                key={index}
+                src={
+                  index < Math.floor(calculateRating(courseData))
+                    ? assets.star
+                    : assets.star_blank
+                }
+                alt="rating"
+                className="w-3.5 h-3.5"
+              />
+            ))}
+          </div>
+          <span className="text-gray-500">
+            {courseData.courseRatings.length}{" "}
+            {courseData.courseRatings.length > 1 ? "ratings" : "rating"}
+          </span>
+          {/* total number of enrolled students */}
+          <p>
+            ( {courseData.enrolledStudents.length}{" "}
+            {courseData.enrolledStudents.length > 1 ? "students" : "studen"})
+          </p>
+        </div>
+        <p className="text-sm">
+          Course By <span className="text-blue-600">Creat</span>
+        </p>
       </div>
       {/* right column */}
       <div></div>
