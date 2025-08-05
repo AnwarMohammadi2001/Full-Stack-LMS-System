@@ -4,6 +4,7 @@ import { AppContext } from "../../context/AppContext";
 import { useParams } from "react-router-dom";
 import assets from "../../assets/assets";
 import humanizeDuration from "humanize-duration"; // make sure it's installed
+import Rating from "../../components/student/Rating";
 
 const Player = () => {
   const { enrolledCourses, calculateChapterTime } = useContext(AppContext);
@@ -107,6 +108,7 @@ const Player = () => {
           </div>
           <div className="flex items-center mt-10 py-3 gap-2">
             <h2 className="text-xl font-semibold">Rate this Course</h2>
+            <Rating />
           </div>
         </div>
 
