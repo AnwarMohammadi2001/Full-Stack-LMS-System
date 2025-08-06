@@ -23,7 +23,7 @@ const AddCourse = () => {
   });
 
   const [courseDescription, setCourseDescription] = useState("");
-
+  // handle chapter
   const handleChapter = (action, chapterId) => {
     if (action === "add") {
       const title = prompt("Enter Chapter Name");
@@ -52,6 +52,7 @@ const AddCourse = () => {
       );
     }
   };
+  // handle lecture
 
   const handleLecture = (action, chapterId, lectureIndex) => {
     if (action === "add") {
@@ -73,6 +74,7 @@ const AddCourse = () => {
       );
     }
   };
+  // add lecture
 
   const addLecture = () => {
     setChapters(
